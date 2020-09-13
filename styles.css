@@ -6,7 +6,7 @@
    border: 2px solid white
 }
 
-#daily-forcast {
+#daily-forcast :first-child{
     border: 2px solid black
 }
 
@@ -19,8 +19,7 @@
     align-content: space-between;
 }
 
-
-.change-bg-cloudy{
+.cloudy, .partly-cloudy-day{
     background: #27282B;
     background: -webkit-linear-gradient(left, #27282B, #5C5051);
     background: -moz-linear-gradient(left, #27282B, #5C5051);
@@ -28,15 +27,11 @@
     color:white;
 }
 
-.test {
-    color:blue;
-    display: inline-block;
-}
-.change-bg-rain {
+.rain {
  background-color: gray;
 }
 
-.change-bg-sun {
+.clear-day {
     background: #FFE216;
 background: -webkit-linear-gradient(left, #FFE216, #9CE9D3);
 background: -moz-linear-gradient(left, #FFE216, #9CE9D3);
@@ -61,14 +56,16 @@ background: linear-gradient(to right, #083994, #000000);
 color: white;
 }
 
-.snow-bg {
+
+
+.snow {
     background: #C2C7D0;
 background: -webkit-linear-gradient(left, #C2C7D0, #252222);
 background: -moz-linear-gradient(left, #C2C7D0, #252222);
 background: linear-gradient(to right, #C2C7D0, #252222);
 }
 
-.clear-night-bg {
+.clear-night {
     background: #232420;
 background: -webkit-linear-gradient(top left, #232420, #1C3553);
 background: -moz-linear-gradient(top left, #232420, #1C3553);
