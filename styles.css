@@ -1,9 +1,24 @@
-#hr-forcast {
-    
+* {
+    list-style: none;
 }
 
+#hr-forcast {
+   border: 2px solid white
+}
 
-/*  classes to change background based on icon*/
+#daily-forcast {
+    border: 2px solid black
+}
+
+.clock {
+    width: 100%;
+    border: 2px solid red;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-content: space-between;
+}
+
 
 .change-bg-cloudy{
     background: #27282B;
