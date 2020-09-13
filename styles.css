@@ -1,0 +1,62 @@
+#hr-forcast {
+    
+}
+
+
+/*  classes to change background based on icon*/
+
+.change-bg-cloudy{
+    background: #27282B;
+    background: -webkit-linear-gradient(left, #27282B, #5C5051);
+    background: -moz-linear-gradient(left, #27282B, #5C5051);
+    background: linear-gradient(to right, #27282B, #5C5051);
+    color:white;
+}
+
+.test {
+    color:blue;
+    display: inline-block;
+}
+.change-bg-rain {
+ background-color: gray;
+}
+
+.change-bg-sun {
+    background: #FFE216;
+background: -webkit-linear-gradient(left, #FFE216, #9CE9D3);
+background: -moz-linear-gradient(left, #FFE216, #9CE9D3);
+background: linear-gradient(to right, #FFE216, #9CE9D3);
+color:black;
+}
+
+.default-bg {
+    background: aqua;
+}
+
+.rain {
+    background-image: url("/rain.jpg");
+    
+}
+
+.partly-cloudy-night {
+    background: #083994;
+background: -webkit-linear-gradient(left, #083994, #000000);
+background: -moz-linear-gradient(left, #083994, #000000);
+background: linear-gradient(to right, #083994, #000000);
+color: white;
+}
+
+.snow-bg {
+    background: #C2C7D0;
+background: -webkit-linear-gradient(left, #C2C7D0, #252222);
+background: -moz-linear-gradient(left, #C2C7D0, #252222);
+background: linear-gradient(to right, #C2C7D0, #252222);
+}
+
+.clear-night-bg {
+    background: #232420;
+background: -webkit-linear-gradient(top left, #232420, #1C3553);
+background: -moz-linear-gradient(top left, #232420, #1C3553);
+background: linear-gradient(to bottom right, #232420, #1C3553);
+color: white;
+}
