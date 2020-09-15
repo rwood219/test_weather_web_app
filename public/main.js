@@ -9,7 +9,7 @@
         lat = position.coords.latitude;
         //const key = apiKey
         //console.log(key)
-        const KEY = "54edd9c1bbf1ba4d15adb1abeaf06736";
+        const KEY = "key";
         var proxy = "https://cors-anywhere.herokuapp.com/";
         var api = `${proxy}https://api.darksky.net/forecast/${KEY}/${lat},${long}`;
         fetch(api)
