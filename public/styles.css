@@ -1,0 +1,76 @@
+* {
+    list-style: none;
+  }
+
+  #hr-forcast {
+    border: 2px solid white;
+  }
+
+  #daily-forcast :first-child {
+    border: 2px solid black;
+  }
+
+  .add-border {
+    border: 2px solid red;
+  }
+
+  .clock {
+    width: 100%;
+    border: 2px solid red;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-content: space-between;
+  }
+
+  .cloudy,
+  .partly-cloudy-day {
+    background: #27282b;
+    background: -webkit-linear-gradient(left, #27282b, #5c5051);
+    background: -moz-linear-gradient(left, #27282b, #5c5051);
+    background: linear-gradient(to right, #27282b, #5c5051);
+    color: white;
+  }
+
+  .rain {
+    background-color: gray;
+  }
+
+  .clear-day {
+    background: #ffe216;
+    background: -webkit-linear-gradient(left, #ffe216, #9ce9d3);
+    background: -moz-linear-gradient(left, #ffe216, #9ce9d3);
+    background: linear-gradient(to right, #ffe216, #9ce9d3);
+    color: black;
+  }
+
+  .default-bg {
+    background: aqua;
+  }
+
+  .rain {
+    background-image: url("/rain.jpg");
+  }
+
+  .partly-cloudy-night {
+    background: #083994;
+    background: -webkit-linear-gradient(left, #083994, #000000);
+    background: -moz-linear-gradient(left, #083994, #000000);
+    background: linear-gradient(to right, #083994, #000000);
+    color: white;
+  }
+
+  .snow {
+    background: #c2c7d0;
+    background: -webkit-linear-gradient(left, #c2c7d0, #252222);
+    background: -moz-linear-gradient(left, #c2c7d0, #252222);
+    background: linear-gradient(to right, #c2c7d0, #252222);
+  }
+
+  .clear-night {
+    background: #232420;
+    background: -webkit-linear-gradient(top left, #232420, #1c3553);
+    background: -moz-linear-gradient(top left, #232420, #1c3553);
+    background: linear-gradient(to bottom right, #232420, #1c3553);
+    color: white;
+  }
