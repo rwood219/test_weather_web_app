@@ -12,32 +12,25 @@ window.addEventListener("load", () => {
       const date = new Date();
       let minutes = date.getMinutes();
       let currentHour = date.getHours();
-
-      // define current day; returns a number 0 thru 6 ; 0 = Sunday
       const currentDay = date.getDay();
-
-      //DarkSky Api Data vars; console log data for more detail
-      const hourlyForcastData = data.hourly.data;
+      const hourlyForcastData = data.hourly.data; //DarkSky Api Data vars; console log data for more detail
       const weeklyForcastData = data.daily.data;
       const currentIcon = data.currently.icon;
-
       //get html elements to append api data
       const dailyForcast = document.getElementById("daily-forcast");
       const hrForcast = document.getElementById("hr-forcast");
+      const setClock = document.querySelectorAll(".clock");
 
       //change amPM var for am or pm based on currenthour value
-      changeAmpm = (currentHour) => {
-        currentHour >= 12 ? (amPm = " PM") : (amPm = " AM");
+      changeAmpm = (time) => {
+        time > 12 ? (amPm = " PM") : (amPm = " AM");
         return amPm;
       };
-      console.log(changeAmpm(5))
 
       //converts 24hr to 12hr format
       adjustHour = (hourNum) => {
-        hourNum == 0
-          ? (hourNum = 12 + amPm)
-          : hourNum >= 12
-          ? (hourNum = hourNum = ((hourNum + 11) % 12) + 1)
+        hourNum > 12
+          ? (hourNum = ((hourNum + 11) % 12) + 1)
           : (hourNum = hourNum);
         return hourNum;
       };
@@ -49,11 +42,9 @@ window.addEventListener("load", () => {
       };
 
       //display current time in ui at top of page; its just a dumb clock
-      const setClock = document.querySelectorAll(".clock");
       setClock.forEach((setClock) => {
         setClock.children[0].textContent = adjustHour(currentHour);
-        setClock.children[1].textContent =
-          addZero(minutes) + changeAmpm(currentHour);
+        setClock.children[1].textContent = addZero(minutes);
       });
 
       // weekdays array provides starting point to leverage current day number to adjust value to match weekly data from API
@@ -95,21 +86,21 @@ window.addEventListener("load", () => {
       //loop api and create dom elements from api data
       for (let i = 0; i < weeklyForcastData.length; i++) {
         const dailyWind = weeklyForcastData[i].windSpeed;
-        let dailyTemp = weeklyForcastData[i].temperatureHigh;
+        const dailyTemp = weeklyForcastData[i].temperatureHigh;
         const nextDay = getNext7Days(currentDay);
         dailyForcast.appendChild(createListItem(nextDay[i]));
         dailyForcast.appendChild(createListItem(dailyWind + "MPH"));
         dailyForcast.appendChild(createListItem(dailyTemp + "F"));
         dailyForcast.appendChild(createListItem(space));
       }
-      for (let i = 0; i < hourlyForcastData.length; i++) {
+      for (let i = 0; i < 48; i++) {
         const hrWind = hourlyForcastData[i].windSpeed;
         const hrTemp = hourlyForcastData[i].temperature;
         const hrSummary = hourlyForcastData[i].summary;
-
-        //adjust hour is interfering with ampm text
+        const adjustedHour = currentHour;
+        console.log(adjustedHour);
+        //adjust hour function is interfering with ampm text
         hrForcast.appendChild(createListItem(adjustHour(currentHour++)));
-
         hrForcast.appendChild(createListItem(hrSummary));
         hrForcast.appendChild(createListItem(hrWind + "MPH"));
         hrForcast.appendChild(createListItem(hrTemp + "F"));
