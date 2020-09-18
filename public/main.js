@@ -23,6 +23,7 @@ window.addEventListener("load", () => {
       const dailyForcast = document.getElementById("daily-forcast");
       const hrForcast = document.getElementById("hr-forcast");
       const setClock = document.querySelectorAll(".clock");
+  
       // weekdays array provides starting point to leverage current day number to adjust value to match weekly data from API
       let weekdays = [
         "Sunday",
@@ -39,20 +40,16 @@ window.addEventListener("load", () => {
         time > 12 ? (amPm = " PM") : (amPm = " AM");
         return amPm;
       };
-      console.log(currentHour);
 
       //converts 24hr to 12hr format
       adjustHour = (hourNum, amp) => {
-        let amPm = [" AM", " PM"];
-        hourNum > 12 ? (amPm = amPm[1]) : (amPm = amPm[0]);
-        hourNum > 12
+        hourNum == 0
+          ? (hourNum = 12)
+          : hourNum > 12
           ? (hourNum = ((hourNum + 11) % 12) + 1)
           : (hourNum = hourNum);
-        return hourNum;
-        return amp;
+        return hourNum;  
       };
-      console.log(adjustHour(currentHour, adjustHour(currentHour++)));
-      console.log(currentHour);
 
       //format minutes to add a 0 if minutes are < 10
       addZero = (num) => {
@@ -104,9 +101,8 @@ window.addEventListener("load", () => {
         const hrTemp = hourlyForcastData[i].temperature;
         const hrSummary = hourlyForcastData[i].summary;
         let amPm = [" AM", " PM"];
-        hrForcast.appendChild(
-          createListItem(adjustHour(currentHour++) + amPm[1])
-        );
+       
+        hrForcast.appendChild(createListItem(adjustHour(currentHour++) + amPm));
         hrForcast.appendChild(createListItem(hrSummary));
         hrForcast.appendChild(createListItem(hrWind + "MPH"));
         hrForcast.appendChild(createListItem(hrTemp + "F"));
@@ -122,4 +118,3 @@ window.addEventListener("load", () => {
     });
   }
 });
-// });
