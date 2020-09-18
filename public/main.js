@@ -1,7 +1,8 @@
 window.addEventListener("load", () => {
   let long;
   let lat;
-  if (navigator.geolocation) {
+  if (!navigator.geolocation) alert("no nav");
+  else {
     navigator.geolocation.getCurrentPosition(async (position) => {
       long = position.coords.longitude;
       lat = position.coords.latitude;
@@ -13,6 +14,8 @@ window.addEventListener("load", () => {
       let minutes = date.getMinutes();
       let currentHour = date.getHours();
       const currentDay = date.getDay();
+      //temporary to make ui easier to look at for now
+      const space = " ------------------";
       const hourlyForcastData = data.hourly.data; //DarkSky Api Data vars; console log data for more detail
       const weeklyForcastData = data.daily.data;
       const currentIcon = data.currently.icon;
@@ -20,33 +23,6 @@ window.addEventListener("load", () => {
       const dailyForcast = document.getElementById("daily-forcast");
       const hrForcast = document.getElementById("hr-forcast");
       const setClock = document.querySelectorAll(".clock");
-
-      //change amPM var for am or pm based on currenthour value
-      changeAmpm = (time) => {
-        time > 12 ? (amPm = " PM") : (amPm = " AM");
-        return amPm;
-      };
-
-      //converts 24hr to 12hr format
-      adjustHour = (hourNum) => {
-        hourNum > 12
-          ? (hourNum = ((hourNum + 11) % 12) + 1)
-          : (hourNum = hourNum);
-        return hourNum;
-      };
-
-      //format minutes to add a 0 if minutes are < 10
-      addZero = (num) => {
-        num < 10 ? (num = ":" + "0" + num) : (num = ":" + num);
-        return num;
-      };
-
-      //display current time in ui at top of page; its just a dumb clock
-      setClock.forEach((setClock) => {
-        setClock.children[0].textContent = adjustHour(currentHour);
-        setClock.children[1].textContent = addZero(minutes);
-      });
-
       // weekdays array provides starting point to leverage current day number to adjust value to match weekly data from API
       let weekdays = [
         "Sunday",
@@ -57,6 +33,39 @@ window.addEventListener("load", () => {
         "Friday",
         "Saturday",
       ];
+
+      //change amPM var for am or pm based on currenthour value
+      changeAmpm = (time) => {
+        time > 12 ? (amPm = " PM") : (amPm = " AM");
+        return amPm;
+      };
+      console.log(currentHour);
+
+      //converts 24hr to 12hr format
+      adjustHour = (hourNum, amp) => {
+        let amPm = [" AM", " PM"];
+        hourNum > 12 ? (amPm = amPm[1]) : (amPm = amPm[0]);
+        hourNum > 12
+          ? (hourNum = ((hourNum + 11) % 12) + 1)
+          : (hourNum = hourNum);
+        return hourNum;
+        return amp;
+      };
+      console.log(adjustHour(currentHour, adjustHour(currentHour++)));
+      console.log(currentHour);
+
+      //format minutes to add a 0 if minutes are < 10
+      addZero = (num) => {
+        num < 10 ? (num = ":" + "0" + num) : (num = ":" + num);
+        return num;
+      };
+
+      //display current time in ui at top of page; its just a dumb clock
+      setClock.forEach((setClock) => {
+        setClock.children[0].textContent = adjustHour(currentHour);
+        setClock.children[1].textContent =
+          addZero(minutes) + changeAmpm(currentHour);
+      });
 
       // function to adjust day text in ui for weekly forcast
       getNext7Days = (currentDay) => {
@@ -80,10 +89,7 @@ window.addEventListener("load", () => {
         return li;
       };
 
-      //temporary to make ui easier to look at for now
-      const space = " ------------------";
-
-      //loop api and create dom elements from api data
+      //loop api and create list items from api data
       for (let i = 0; i < weeklyForcastData.length; i++) {
         const dailyWind = weeklyForcastData[i].windSpeed;
         const dailyTemp = weeklyForcastData[i].temperatureHigh;
@@ -97,10 +103,10 @@ window.addEventListener("load", () => {
         const hrWind = hourlyForcastData[i].windSpeed;
         const hrTemp = hourlyForcastData[i].temperature;
         const hrSummary = hourlyForcastData[i].summary;
-        const adjustedHour = currentHour;
-        console.log(adjustedHour);
-        //adjust hour function is interfering with ampm text
-        hrForcast.appendChild(createListItem(adjustHour(currentHour++)));
+        let amPm = [" AM", " PM"];
+        hrForcast.appendChild(
+          createListItem(adjustHour(currentHour++) + amPm[1])
+        );
         hrForcast.appendChild(createListItem(hrSummary));
         hrForcast.appendChild(createListItem(hrWind + "MPH"));
         hrForcast.appendChild(createListItem(hrTemp + "F"));
@@ -116,3 +122,4 @@ window.addEventListener("load", () => {
     });
   }
 });
+// });
